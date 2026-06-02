@@ -1,8 +1,8 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <locale.h>
 
 int AMIGOS = 6;
-int PARCELAS = 12;
+int PARCELAS = 0;
 float DESCONTO = 0.15;
 
 void mostrarItens(void);
@@ -24,13 +24,23 @@ int main(void) {
     }
 
     printf("\n1 - A vista (15%% de desconto)\n");
-    printf("2 - Parcelado em %d vezes sem juros\n", PARCELAS);
+    printf("2 - Parcelado sem juros\n");
     printf("Digite a opcao de pagamento: ");
     scanf("%d", &pagamento);
 
     while (pagamento != 1 && pagamento != 2) {
         printf("Opcao invalida. Digite 1 ou 2: ");
         scanf("%d", &pagamento);
+    }
+
+    if (pagamento == 2) {
+        printf("Digite em quantas vezes deseja parcelar (no minimo 1): ");
+        scanf("%d", &PARCELAS);
+        
+        while (PARCELAS < 1) {
+            printf("Quantidade invalida. Digite um numero maior que 0: ");
+            scanf("%d", &PARCELAS);
+        }
     }
 
     exibirOrcamento(item, pagamento);
